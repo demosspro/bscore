@@ -1,0 +1,100 @@
+[
+    {
+        "id": "d020545e884729ac",
+        "type": "tab",
+        "label": "Поток 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fd72eb6cb1c4846d",
+        "type": "exec",
+        "z": "d020545e884729ac",
+        "command": "(echo 1 > /sys/class/gpio/gpio453/value; sleep 1; echo 0 > /sys/class/gpio/gpio453/value)",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "grn",
+        "x": 90,
+        "y": 710,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3121f01733627ca8",
+        "type": "inject",
+        "z": "d020545e884729ac",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 670,
+        "wires": [
+            [
+                "fd72eb6cb1c4846d"
+            ]
+        ]
+    },
+    {
+        "id": "0455c084d7ce8cc6",
+        "type": "exec",
+        "z": "d020545e884729ac",
+        "command": "echo 0 > /sys/class/gpio/gpio452/value",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "r0",
+        "x": 90,
+        "y": 750,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "fceecc8787c3eeb9",
+        "type": "inject",
+        "z": "d020545e884729ac",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 790,
+        "wires": [
+            [
+                "0455c084d7ce8cc6"
+            ]
+        ]
+    }
+]
