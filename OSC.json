@@ -1,0 +1,265 @@
+[
+    {
+        "id": "1bd2b382.4dd4f4",
+        "type": "tab",
+        "label": "OSC 2 MQTT",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3f085b2c.3d462c",
+        "type": "mqtt out",
+        "z": "1bd2b382.4dd4f4",
+        "name": "clip",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a4f954b.ada4d28",
+        "x": 580,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f390cb1f.223058",
+        "type": "mqtt in",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "topic": "#",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "a4f954b.ada4d28",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 220,
+        "y": 210,
+        "wires": [
+            [
+                "ba16d961.6125a"
+            ]
+        ]
+    },
+    {
+        "id": "ba16d961.6125a",
+        "type": "osc",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "path": "",
+        "metadata": false,
+        "x": 340,
+        "y": 210,
+        "wires": [
+            [
+                "cc273a95.3d417",
+                "a1bf4c7e21f9242f"
+            ]
+        ]
+    },
+    {
+        "id": "cc273a95.3d417",
+        "type": "udp out",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "addr": "10.0.255.132",
+        "iface": "",
+        "port": "10024",
+        "ipv": "udp4",
+        "outport": "10025",
+        "base64": false,
+        "multicast": "false",
+        "x": 520,
+        "y": 210,
+        "wires": []
+    },
+    {
+        "id": "22c9734b0c6a0af7",
+        "type": "inject",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1,2",
+        "payloadType": "str",
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "54b4d19f218a6e2a"
+            ]
+        ]
+    },
+    {
+        "id": "54b4d19f218a6e2a",
+        "type": "function",
+        "z": "1bd2b382.4dd4f4",
+        "name": "mix",
+        "func": "let mixing = []\nmixing = msg.payload.split(\",\")\nnode.warn(mixing)\nmix(mixing[0], mixing[1])\nfunction mix(outp, inp) {\n    msg.topic = (\"/composition/layers/\" \n    + outp + \"/clips/\" \n    + inp + \"/connect\");\n    msg.payload = \"1\"\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "3f085b2c.3d462c"
+            ]
+        ]
+    },
+    {
+        "id": "75bf92bd8ba24820",
+        "type": "udp in",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "iface": "",
+        "port": "10025",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 290,
+        "y": 290,
+        "wires": [
+            [
+                "a1bf4c7e21f9242f"
+            ]
+        ]
+    },
+    {
+        "id": "a1bf4c7e21f9242f",
+        "type": "debug",
+        "z": "1bd2b382.4dd4f4",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 290,
+        "wires": []
+    },
+    {
+        "id": "b7f651deb6013748",
+        "type": "inject",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 230,
+        "y": 50,
+        "wires": [
+            [
+                "cf8cb6215a4e80c8"
+            ]
+        ]
+    },
+    {
+        "id": "16aff0cd1b5a93f0",
+        "type": "inject",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "str",
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "cf8cb6215a4e80c8"
+            ]
+        ]
+    },
+    {
+        "id": "cf8cb6215a4e80c8",
+        "type": "change",
+        "z": "1bd2b382.4dd4f4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "/ch/01/mix/on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 60,
+        "wires": [
+            [
+                "3f085b2c.3d462c",
+                "a1bf4c7e21f9242f"
+            ]
+        ]
+    },
+    {
+        "id": "a4f954b.ada4d28",
+        "type": "mqtt-broker",
+        "name": "localhost",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
