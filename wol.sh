@@ -1,0 +1,1 @@
+wakeonlan -f wol.mac
