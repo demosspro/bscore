@@ -1,0 +1,12 @@
+[Unit]
+Description=GPIO
+ConditionPathExists=/
+[Service]
+Type=simple
+ExecStart=/bin/bash /gpio.sh
+TimeoutSec=0
+Restart=always
+RestartSec=15s
+SysVStartPriority=-100
+[Install]
+WantedBy=multi-user.target
